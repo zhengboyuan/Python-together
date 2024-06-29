@@ -320,7 +320,7 @@ def main():
     st.markdown('**储能参与虚拟电厂10年收益分布（万元/年）**')
     st.dataframe(total.T)
     st.bar_chart(total)
-    
+    st.markdown("----")
     st.subheader('可调、可控负荷参与辅助服务+需求响应')
     col4, col5, col6 = st.columns(3)
     col4.metric(label="合计收益（万元/年）",value= round(controllable_load_total.sum()))
@@ -333,7 +333,7 @@ def main():
     controllable_load_total= controllable_load_total.round(2)
     st.dataframe(controllable_load_total.T)
     st.bar_chart(controllable_load_total)
-    
+    st.markdown("----")
     st.subheader('储能+可调、可控负荷总收益情况')
     col7, col8, col9 = st.columns(3)
     # data1 = controllable_load_auxiliary_service_revenue
