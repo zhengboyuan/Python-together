@@ -215,7 +215,7 @@ def energy_storage_vpp(energy_storage,energy_storage_deep,Battery_Degradation_ye
 
 
 def display_sidebar():
-    logo_url = "https://pic.imgdb.cn/item/667f7317d9c307b7e9d790bb.jpg"
+    logo_url = "https://pic.imgdb.cn/item/667f9aa9d9c307b7e90ae152.jpg"
     st.logo(logo_url)
     ## 6月29日 优化number_input 最大值、最小值 加入logo展示
     st.sidebar.title('泰能电力虚拟电厂用户收益测算')
