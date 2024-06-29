@@ -215,8 +215,19 @@ def energy_storage_vpp(energy_storage,energy_storage_deep,Battery_Degradation_ye
 
 
 def display_sidebar():
-    logo_url = "https://pic.imgdb.cn/item/667f9aa9d9c307b7e90ae152.jpg"
-    st.logo(logo_url)
+    LOGO_URL_LARGE = 'https://pic.imgdb.cn/item/667f9aa9d9c307b7e90ae152.jpg'
+    st.sidebar.markdown(
+    f"""
+    <style>
+    .custom-logo {{
+        width: 100px;  /* 您希望的大小 */
+        height: 80;
+    }}
+    </style>
+    <img src="{LOGO_URL_LARGE}" class="custom-logo">
+    """,
+    unsafe_allow_html=True
+)
     ## 6月29日 优化number_input 最大值、最小值 加入logo展示
     st.sidebar.title('泰能电力虚拟电厂用户收益测算')
     
