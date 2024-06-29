@@ -215,11 +215,10 @@ def energy_storage_vpp(energy_storage,energy_storage_deep,Battery_Degradation_ye
 
 
 def display_sidebar():
-    #logo_url = "logo.jpg"
-    #st.logo(image = logo_url)
+    logo_url = "https://github.com/zhengboyuan/Python-together/blob/master/logo.JPG"
+    st.logo(LOGO_URL_LARGE,link=logo_url)
     ## 6月29日 优化number_input 最大值、最小值 加入logo展示
     st.sidebar.title('泰能电力虚拟电厂用户收益测算')
-    st.logo('logo.jpg')
     ## 储能部分
     st.sidebar.subheader('储能输入参数')
     energy_storage_option = st.sidebar.selectbox("是否进行储能数据修改", ("是", "否"),index=1)
