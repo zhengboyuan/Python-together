@@ -326,7 +326,7 @@ def main():
         st.markdown('''利用储能、微燃机等启动速度快、出力灵活的特点，参与电网的辅助服务，获取额外收益。''')
         st.markdown('''#### 3、参与现货市场参与高价品种竞争''')
         st.markdown(''':red[***《电力现货市场基本规则（试行）》经营主体扩大到虚拟电厂、独立储能等新型主体，在规则下可以参与备类高价交易品种市场竞争。***]''')
-        VIDEO_URL = """<iframe src="//player.bilibili.com/player.html?isOutside=true&aid=492374152&bvid=BV1TN411x7Fa&cid=1303415771&p=1"width="640" height="360" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>"""
+        VIDEO_URL = """<iframe src="//player.bilibili.com/player.html?isOutside=true&aid=492374152&bvid=BV1TN411x7Fa&cid=1303415771&p=1"width="50%" height="360" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>"""
         st.components.v1.html(VIDEO_URL,height=380)
     st.subheader('储能参与辅助服务+需求响应')
     #with st.expander("储能参与辅助服务+需求响应计算逻辑"):
