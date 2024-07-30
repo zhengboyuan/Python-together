@@ -396,6 +396,7 @@ def main():
         st.metric(label="合计收益（万元/年）",value= round(round(spot_market_revenue.sum(),2)/10000,2))
         spot_market_revenue.columns=['虚拟电厂现货收益(万元/年)']
         spot_market_revenue = round(spot_market_revenue/10000,2)
+        st.markdown('**虚拟电厂参与现货10年收益分布（万元/年）**')
         st.dataframe(spot_market_revenue.T)
         st.bar_chart(spot_market_revenue)
     
@@ -446,6 +447,7 @@ def main():
     total_revenue = pd.DataFrame(total_revenue)
     total_revenue.columns=['虚拟电厂总收益(万元/年)']
     total_revenue = round(total_revenue,2)
+    st.markdown('**用户虚拟电厂10年收益分布（万元/年）**')
     st.dataframe(total_revenue.T, width=2100)
 if __name__ == "__main__":
     main()
