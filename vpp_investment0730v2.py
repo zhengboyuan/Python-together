@@ -125,7 +125,7 @@ def wind_solar_revenue(power,up_ratio,response_ratio
     data = pd.DataFrame(data)
     data = data.iloc[:-1,:]
     adjustable_controllable_load_capacity = data
-    print(adjustable_controllable_load_capacity)
+    #print(adjustable_controllable_load_capacity)
     energy_response = data*response_ratio*hour
     peak_shaving_moring = energy_response*peak_shaving_moring_price*peak_shaving_count/10000 #削峰（万元/年
     abandonment_cost = energy_response*0.53*5/10*(-1) #弃光成本（万元/年）
@@ -163,7 +163,7 @@ def Battery_Degradation(energy_storage,energy_storage_deep,Battery_Degradation_y
         energy_storage_power.append(energy_storage)
         year += 1
     energy_storage =  pd.DataFrame(energy_storage_power)
-    print(energy_storage.iloc[1:,:].T)
+    #print(energy_storage.iloc[1:,:].T)
     return energy_storage.iloc[1:,:]
 # energy_storage = Battery_Degradation(35,0.9,0.10,0.05,0.0225,0.897,0.965)
 def plot_bar(df,set_ylabel):
@@ -438,7 +438,7 @@ def main():
 }
     original_df = pd.DataFrame(data)
     plt.figure(figsize=(8, 6))
-    print('original_df',original_df)
+    #print('original_df',original_df)
     values_series = pd.Series([float(item[0]) for item in original_df['values']])
     # 创建新的 DataFrame 用于绘制饼图
     pie_df = pd.DataFrame({
