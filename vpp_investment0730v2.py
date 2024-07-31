@@ -406,7 +406,7 @@ def main():
         spot_market_revenue.columns=['虚拟电厂现货收益(万元/年)']
         spot_market_revenue = round(spot_market_revenue/10000,2)
         st.markdown('**虚拟电厂参与现货10年收益分布（万元/年）**')
-        st.dataframe(spot_market_revenue.T)
+        st.dataframe(spot_market_revenue.T, width=2100)
         st.bar_chart(spot_market_revenue)
     
     st.subheader('储能+可调、可控负荷+现货总收益情况')
