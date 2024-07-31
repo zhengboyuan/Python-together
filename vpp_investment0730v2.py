@@ -459,7 +459,7 @@ def main():
     st.markdown('**用户虚拟电厂10年收益分布（万元/年）**')
     st.dataframe(total_revenue.T, width=2100)
 if __name__ == "__main__":
-    st.set_page_config(page_title="虚拟电厂数据查询"
+    st.set_page_config(page_title="泰能虚拟电厂用户收益测算"
                        , page_icon="🏠"
                        ,layout="wide"
                        ,initial_sidebar_state="expanded",
