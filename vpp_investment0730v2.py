@@ -328,6 +328,7 @@ def display_sidebar():
     else:
         controllable_load_total,controllable_load_auxiliary_service_revenue,controllable_load_demand_response_revenue= power_up(38,0.05,0.13,1000,10,1000,5,400,5,1,3,1.2,1,4,1,0.5)
     st.sidebar.subheader('现货收益部分输入参数')
+
     spot_market_revenue_option = st.sidebar.selectbox("是否进行现货收益数据修改", ("是", "否"),index=1)
     if spot_market_revenue_option == "是":
         sales_electricity = st.sidebar.number_input("虚拟电厂年售电量（亿/kWh）", value=0.0, step=0.1,min_value=0.0,max_value=100.0)*100000000
@@ -336,6 +337,7 @@ def display_sidebar():
         spot_market_revenue = sales_electricity_increase(sales_electricity,growth_rate,revenue_per_unit_price)
     else:
         spot_market_revenue = sales_electricity_increase(0,0,0)
+        
     return total,auxiliary_service_revenue,demand_response_revenue,controllable_load_total,controllable_load_auxiliary_service_revenue,controllable_load_demand_response_revenue,spot_market_revenue
 def main():
     total,auxiliary_service_revenue,demand_response_revenue,controllable_load_total,controllable_load_auxiliary_service_revenue,controllable_load_demand_response_revenue,spot_market_revenue = display_sidebar()
@@ -360,39 +362,46 @@ def main():
         st.markdown(''':red[***《电力现货市场基本规则（试行）》经营主体扩大到虚拟电厂、独立储能等新型主体，在规则下可以参与备类高价交易品种市场竞争。***]''')
         VIDEO_URL = """<iframe src="//player.bilibili.com/player.html?isOutside=true&aid=492374152&bvid=BV1TN411x7Fa&cid=1303415771&p=1"width="100%" height="360" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>"""
         st.components.v1.html(VIDEO_URL,height=380)
-    st.subheader('储能参与辅助服务+需求响应')
-    #with st.expander("储能参与辅助服务+需求响应计算逻辑"):
-            #st.markdown('分别计算储能参与辅助服务与需求的收益。')
-            #st.selectbox("数据修改", ("是", "否"),index=1)
-    col1, col2, col3 = st.columns(3)
-    col1.metric(label="合计收益（万元/年）",value= round(total.sum()))
-    col2.metric(label="辅助服务收益（万元/年）",value= round(auxiliary_service_revenue.sum()))
-    col3.metric(label="需求响应收益（万元/年）",value= round(demand_response_revenue.sum()))
-    total = pd.DataFrame(total, columns=[0])
-    total.index = total.index + 1
-    total.columns=['储能收益']
-    total= total.round(2)
-    st.markdown('**储能参与虚拟电厂10年收益分布（万元/年）**')
-    st.dataframe(total.T)
-    st.bar_chart(total)
-    st.markdown("----")
+    
+    tabs = [""":orange-background[储能参与收益]""", ':orange-background[可调可控负荷收益]', ':orange-background[参与现货收益]']
+    tab1, tab2, tab3 = st.tabs(tabs)
+    
+    with tab1:
+        st.subheader('储能参与辅助服务+需求响应')
+        #with st.expander("储能参与辅助服务+需求响应计算逻辑"):
+                #st.markdown('分别计算储能参与辅助服务与需求的收益。')
+                #st.selectbox("数据修改", ("是", "否"),index=1)
+        col1, col2, col3 = st.columns(3)
+        col1.metric(label="合计收益（万元/年）",value= round(total.sum()))
+        col2.metric(label="辅助服务收益（万元/年）",value= round(auxiliary_service_revenue.sum()))
+        col3.metric(label="需求响应收益（万元/年）",value= round(demand_response_revenue.sum()))
+        total = pd.DataFrame(total, columns=[0])
+        total.index = total.index + 1
+        total.columns=['储能收益']
+        total= total.round(2)
+        st.markdown('**储能参与虚拟电厂10年收益分布（万元/年）**')
+        st.dataframe(total.T)
+        st.bar_chart(total)
+        st.markdown("----")
     ##可调、可控负荷参与辅助服务+需求响应
-    st.subheader('可调、可控负荷参与辅助服务+需求响应')
-    col4, col5, col6 = st.columns(3)
-    col4.metric(label="合计收益（万元/年）",value= round(controllable_load_total.sum()))
-    col5.metric(label="辅助服务收益（万元/年）",value= round(controllable_load_auxiliary_service_revenue.sum()))
-    col6.metric(label="需求响应收益（万元/年）",value= round(controllable_load_demand_response_revenue.sum()))
-    controllable_load_total = pd.DataFrame(controllable_load_total, columns=[0])
-    controllable_load_total.index = controllable_load_total.index + 1
-    controllable_load_total.columns=['可调、可控负荷收益']
-    st.markdown('**可调、可控负荷参与虚拟电厂10年收益分布（万元/年）**')
-    controllable_load_total= controllable_load_total.round(2)
-    st.dataframe(controllable_load_total.T)
-    st.bar_chart(controllable_load_total)
+    with tab2:
+        st.subheader('可调、可控负荷参与辅助服务+需求响应')
+        col4, col5, col6 = st.columns(3)
+        col4.metric(label="合计收益（万元/年）",value= round(controllable_load_total.sum()))
+        col5.metric(label="辅助服务收益（万元/年）",value= round(controllable_load_auxiliary_service_revenue.sum()))
+        col6.metric(label="需求响应收益（万元/年）",value= round(controllable_load_demand_response_revenue.sum()))
+        controllable_load_total = pd.DataFrame(controllable_load_total, columns=[0])
+        controllable_load_total.index = controllable_load_total.index + 1
+        controllable_load_total.columns=['可调、可控负荷收益']
+        st.markdown('**可调、可控负荷参与虚拟电厂10年收益分布（万元/年）**')
+        controllable_load_total= controllable_load_total.round(2)
+        st.dataframe(controllable_load_total.T)
+        st.bar_chart(controllable_load_total)
     ##现货收益情况部分
-    st.subheader('虚拟电厂现货收益情况')
-    with st.expander("虚拟电厂现货收益情况"):
+    with tab3:
+        st.subheader('虚拟电厂现货收益情况')
         
+            
         st.metric(label="合计收益（万元/年）",value= round(round(spot_market_revenue.sum(),2)/10000,2))
         spot_market_revenue.columns=['虚拟电厂现货收益(万元/年)']
         spot_market_revenue = round(spot_market_revenue/10000,2)
