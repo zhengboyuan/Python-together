@@ -6,7 +6,8 @@ import streamlit as st
 # 设置matplotlib字体支持中文
 plt.rcParams['font.sans-serif'] = ['SimHei']
 plt.rcParams['axes.unicode_minus'] = False
-
+def page1():
+    st.write(st.session_state.foo)
 # 页面配置
 st.set_page_config(page_title="负荷分析应用", layout="wide")
 
