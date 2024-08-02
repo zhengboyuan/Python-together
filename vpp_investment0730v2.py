@@ -19,7 +19,7 @@ import plotly.graph_objects as go
 # 设置matplotlib字体支持中文
 plt.rcParams['font.sans-serif'] = ['SimHei']
 plt.rcParams['axes.unicode_minus'] = False
-from page_functions import page1
+
 
 def investment(first_year,second_year,up_ratio):
     """
@@ -478,6 +478,5 @@ if __name__ == "__main__":
     menu_items={
                'about': "此应用适用于虚拟电厂用户侧收益测算。"
     })
-    pg = st.navigation([st.Page(page1), st.Page("查询数据接口V1.py")])
-    pg.run()
+
     main()
