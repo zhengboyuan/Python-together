@@ -478,4 +478,6 @@ if __name__ == "__main__":
     menu_items={
                'about': "此应用适用于虚拟电厂用户侧收益测算。"
     })
+    pg = st.navigation([st.Page(page1), st.Page("/page/查询数据接口V1.py")])
+    pg.run()
     main()
