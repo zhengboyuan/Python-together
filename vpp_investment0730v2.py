@@ -19,7 +19,7 @@ import plotly.graph_objects as go
 # 设置matplotlib字体支持中文
 plt.rcParams['font.sans-serif'] = ['SimHei']
 plt.rcParams['axes.unicode_minus'] = False
-
+from page_functions import page1
 
 def investment(first_year,second_year,up_ratio):
     """
