@@ -4,3 +4,4 @@ matplotlib
 datetime
 plotly
 seaborn 
+streamlit_navigation_bar
