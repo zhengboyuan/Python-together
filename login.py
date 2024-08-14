@@ -7,8 +7,6 @@ actual_password = "zcdl"
 # 初始化会话状态变量
 if 'oklogin' not in st.session_state:
     st.session_state.oklogin = False
-
-
 def login_cb(form_email, form_password):
     """表单提交时更新登录状态"""
     # 比较输入的凭据与实际凭据是否匹配
@@ -16,8 +14,7 @@ def login_cb(form_email, form_password):
         st.session_state.oklogin = True  # 更新登录状态为True
         st.session_state.username = form_email  # 保存用户名
         placeholder.empty()  # 清空表单容器
-        #st.rerun()  # 重新运行应用以显示成功消息和链接
-        #st.experimental_rerun() 
+        st.session_state.sync()  # 同步会话状态
     else:
         st.error("无效的用户名或密码。请重试。")  # 显示错误消息
 # 检查用户是否已经登录
