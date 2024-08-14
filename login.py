@@ -14,10 +14,11 @@ def login_cb(form_email, form_password):
         st.session_state.oklogin = True  # 更新登录状态为True
         st.session_state.username = form_email  # 保存用户名
         placeholder.empty()  # 清空表单容器
-        st.experimental_set_query_params({"login": "success"})  # 设置查询参数
-        st.experimental_rerun()  # 重新运行页面
+        #st.rerun()  # 重新运行应用以显示成功消息和链接
+        #st.experimental_rerun() 
     else:
         st.error("无效的用户名或密码。请重试。")  # 显示错误消息
+# 检查用户是否已经登录
 # 检查用户是否已经登录
 if not st.session_state.oklogin:
     # 显示登录页面
