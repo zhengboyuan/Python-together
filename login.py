@@ -14,7 +14,7 @@ def login_cb(form_email, form_password):
         st.session_state.oklogin = True  # 更新登录状态为True
         st.session_state.username = form_email  # 保存用户名
         placeholder.empty()  # 清空表单容器
-        st.session_state.sync()  # 同步会话状态
+        st.session_state.sync()  # 同步session状态
     else:
         st.error("无效的用户名或密码。请重试。")  # 显示错误消息
 # 检查用户是否已经登录
