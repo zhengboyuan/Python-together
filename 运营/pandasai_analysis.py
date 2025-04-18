@@ -7,7 +7,7 @@ import logging
 import io
 import os
 from dotenv import load_dotenv
-from pandasai.agent.base_judge import BaseJudge
+#from pandasai.agent.base_judge import BaseJudge
 # 加载环境变量
 load_dotenv()
 
