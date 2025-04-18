@@ -1,0 +1,19 @@
+2017年12月31日
+1.切换多版本Python
+https://jingyan.baidu.com/article/22a299b5e6e4909e18376a4b.html
+(1)conda --version
+(2)conda info --envs
+(3)conda create --name python27 python=3.5
+(4)conda info --envs
+(5)source activate python35
+source activate python35
+pip install tensorflow
+2.在anaconda中可以进行版本切换
+需要更新相关更新包
+3.使用tensorboard
+tensorboard --logdir logs
+http://localhost:6006/
+
+？？？
+测试dxxx
+xxx
