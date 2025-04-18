@@ -2,11 +2,11 @@ import streamlit as st
 import pandas as pd
 import altair as alt
 from utils import DeepseekLLM, file_uploader, load_data
-from .pandasai_analysis import pandasai_analysis
-from .smart_pandasai_analysis import smart_pandasai_analysis
-from .Deepseek_report import smart_report
+from pandasai_analysis import pandasai_analysis
+from smart_pandasai_analysis import smart_pandasai_analysis
+from Deepseek_report import smart_report
 from pandasai import Agent, SmartDataframe
-from .hand_analysis import hand_analysis
+from hand_analysis import hand_analysis
 # 设置页面布局和中文字体
 st.set_page_config(layout="wide")
 st.markdown("""
