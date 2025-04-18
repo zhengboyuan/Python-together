@@ -5,6 +5,7 @@ pandas==2.2.1
 numpy==1.26.4
 pandasai>=2.0.4  # 2.0.4+支持pandas 2.x
 altair==5.3.0
+pyyaml==6.0.1  # pandasai依赖
 
 # 数据可视化
 matplotlib==3.8.3
