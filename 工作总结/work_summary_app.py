@@ -9,6 +9,35 @@ from collections import defaultdict
 deepseek_key = "sk-5e2d18a842094fdead32a0a2b259439f"
 client = OpenAI(api_key=deepseek_key, base_url="https://api.deepseek.com")
 
+def test_deepseek_connection():
+    """测试Deepseek API连接"""
+    try:
+        test_prompt = "请回复'API连接正常'"
+        response = client.chat.completions.create(
+            model="deepseek-reasoner",
+            messages=[{"role": "user", "content": test_prompt}],
+            max_tokens=10
+        )
+        if response.choices[0].message.content == "API连接正常":
+            st.success("✅ Deepseek API连接正常")
+        else:
+            st.warning(f"⚠️ API返回异常: {response.choices[0].message.content}")
+    except Exception as e:
+        st.error(f"❌ Deepseek API连接失败: {str(e)}")
+
+# Streamlit界面配置（只执行一次）
+st.set_page_config(page_title="工作总结分析系统", layout="wide")
+st.title("📊 工作日报总结分析")
+
+# 初始化session_state
+if 'report_df' not in st.session_state:
+    st.session_state.report_df = None
+if 'last_uploaded' not in st.session_state:
+    st.session_state.last_uploaded = None
+
+# 测试API连接
+test_deepseek_connection()
+
 def extract_keywords_for_person(person_name, summaries):
     """使用Deepseek分析一个人的所有工作总结"""
     try:
@@ -20,7 +49,7 @@ def extract_keywords_for_person(person_name, summaries):
 4. 必须返回纯JSON格式，示例：{'tasks': ['任务1','任务2']}"""
         
         response = client.chat.completions.create(
-            model="deepseek-reasoner",
+            model="deepseek-chat",
             messages=[
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": f"请分析{person_name}的工作总结，提取标准化的工作任务:\n{combined_text}"}
@@ -96,15 +125,7 @@ def analyze_work_history(df):
     
     return pd.DataFrame(report)
 
-# Streamlit界面
-st.set_page_config(page_title="工作总结分析系统", layout="wide")
-st.title("📊 工作日报总结分析")
-
-# 初始化session_state
-if 'report_df' not in st.session_state:
-    st.session_state.report_df = None
-if 'last_uploaded' not in st.session_state:
-    st.session_state.last_uploaded = None
+# 主界面功能
 
 uploaded_file = st.file_uploader("上传工作总结CSV文件", type=["csv"])
 
