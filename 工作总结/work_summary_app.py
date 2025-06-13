@@ -5,25 +5,32 @@ import json
 from openai import OpenAI
 from collections import defaultdict
 
-# Deepseek API配置
-deepseek_key = "sk-5e2d18a842094fdead32a0a2b259439f"
-client = OpenAI(api_key=deepseek_key, base_url="https://api.deepseek.com")
+# OpenRouter API配置
+openrouter_key = "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"
+client = OpenAI(
+    base_url="https://openrouter.ai/api/v1",
+    api_key=openrouter_key
+)
 
-def test_deepseek_connection():
-    """测试Deepseek API连接"""
+def test_openrouter_connection():
+    """测试OpenRouter API连接"""
     try:
         test_prompt = "请回复'API连接正常'"
         response = client.chat.completions.create(
-            model="deepseek-reasoner",
+            model="qwen/qwen3-235b-a22b",
             messages=[{"role": "user", "content": test_prompt}],
-            max_tokens=10
+            max_tokens=10,
+            extra_headers={
+                "HTTP-Referer": "http://localhost",
+                "X-Title": "工作总结分析系统"
+            }
         )
         if response.choices[0].message.content == "API连接正常":
-            st.success("✅ Deepseek API连接正常")
+            st.success("✅ OpenRouter API连接正常")
         else:
             st.warning(f"⚠️ API返回异常: {response.choices[0].message.content}")
     except Exception as e:
-        st.error(f"❌ Deepseek API连接失败: {str(e)}")
+        st.error(f"❌ OpenRouter API连接失败: {str(e)}")
 
 # Streamlit界面配置（只执行一次）
 st.set_page_config(page_title="工作总结分析系统", layout="wide")
@@ -36,7 +43,7 @@ if 'last_uploaded' not in st.session_state:
     st.session_state.last_uploaded = None
 
 # 测试API连接
-test_deepseek_connection()
+test_openrouter_connection()
 
 def extract_keywords_for_person(person_name, summaries):
     """使用Deepseek分析一个人的所有工作总结"""
@@ -49,14 +56,18 @@ def extract_keywords_for_person(person_name, summaries):
 4. 必须返回纯JSON格式，示例：{'tasks': ['任务1','任务2']}"""
         
         response = client.chat.completions.create(
-            model="deepseek-chat",
+            model="qwen/qwen3-30b-a3b:free",
             messages=[
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": f"请分析{person_name}的工作总结，提取标准化的工作任务:\n{combined_text}"}
             ],
             temperature=0.2,
             max_tokens=1000,
-            response_format={"type": "json_object"}
+            response_format={"type": "json_object"},
+            extra_headers={
+                "HTTP-Referer": "http://localhost",
+                "X-Title": "工作总结分析系统"
+            }
         )
         result = response.choices[0].message.content
         try:
